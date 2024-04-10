@@ -1,0 +1,91 @@
+<form #signupForm="ngForm" (ngSubmit)="signupForm.valid && onSubmit()">
+  <div *ngIf="signupForm.submitted && signupForm.valid">
+    Vous êtes inscrits !
+  </div>
+  <div *ngIf="signupForm.valid">Tous les champs sont correct</div>
+  <div *ngIf="signupForm.submitted && !signupForm.valid">
+    Les champs ne sont pas valide
+  </div>
+
+  <fieldset>
+    <label for="firstname-order">Firstname</label>
+    <input
+      type="text"
+      name="firstname-order"
+      id="firstname-order"
+      placeholder="Firstname"
+      required
+      maxlength="15"
+      minlength="3"
+      #firstname="ngModel"
+      [(ngModel)]="user.firstName"
+    />
+    <div *ngIf="signupForm.submitted">
+      <span *ngIf="firstname.errors?.['required']"
+        >the firstname is required</span
+      >
+      <span *ngIf="firstname.errors?.['maxlength']">15 caractères maximum</span>
+      <span *ngIf="firstname.errors?.['minlength']">3 caractères minimum</span>
+    </div>
+  </fieldset>
+  <fieldset>
+    <label for="lastname-order">Lastname</label>
+    <input
+      type="text"
+      name="lastname-order"
+      id="lastname-order"
+      placeholder="Lastname"
+      required
+      maxlength="15"
+      minlength="3"
+      #lastname="ngModel"
+      [(ngModel)]="user.lastName"
+    />
+    <div *ngIf="signupForm.submitted">
+      <span *ngIf="lastname.errors?.['required']"
+        >the lastname is required</span
+      >
+      <span *ngIf="lastname.errors?.['maxlength']">15 caractères maximum</span>
+      <span *ngIf="lastname.errors?.['minlength']">3 caractères minimum</span>
+    </div>
+  </fieldset>
+  <fieldset>
+    <label for="email-order">Email</label>
+    <input
+      type="email"
+      name="email-order"
+      id="email-order"
+      placeholder="Email"
+      required
+      email
+      #email="ngModel"
+      [(ngModel)]="user.email"
+    />
+    <div *ngIf="signupForm.submitted">
+      <span *ngIf="email.errors?.['required']">the email is required</span>
+      <span *ngIf="email.errors?.['email']">Address is not valid</span>
+    </div>
+  </fieldset>
+  <fieldset>
+    <label for="password-order">Password</label>
+    <input
+      type="password"
+      name="password-order"
+      id="password-order"
+      placeholder="Password"
+      required
+      maxlength="15"
+      #password="ngModel"
+      [(ngModel)]="user.password"
+    />
+    <div *ngIf="signupForm.submitted">
+      <span *ngIf="password.errors?.['required']"
+        >the password is required</span
+      >
+      <span *ngIf="password.errors?.['maxlength']">15 caractères max</span>
+    </div>
+  </fieldset>
+
+  <button type="reset">restor</button>
+  <button type="submit">Submit</button>
+</form>
